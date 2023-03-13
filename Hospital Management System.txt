@@ -1,0 +1,132 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class HospitalManagementSystem {
+
+    private static List<Patient> patients = new ArrayList<>();
+    private static List<Doctor> doctors = new ArrayList<>();
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        System.out.println("Welcome to the Hospital Management System!");
+
+        while (true) {
+            System.out.println("Select an option:");
+            System.out.println("1. Add a Patient");
+            System.out.println("2. Add a Doctor");
+            System.out.println("3. View all Patients");
+            System.out.println("4. View all Doctors");
+            System.out.println("5. Exit");
+
+            int option = scanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    addPatient();
+                    break;
+                case 2:
+                    addDoctor();
+                    break;
+                case 3:
+                    viewAllPatients();
+                    break;
+                case 4:
+                    viewAllDoctors();
+                    break;
+                case 5:
+                    System.out.println("Goodbye!");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        }
+    }
+
+    private static void addPatient() {
+        System.out.println("Enter the patient's name:");
+        String name = scanner.next();
+
+        System.out.println("Enter the patient's age:");
+        int age = scanner.nextInt();
+
+        System.out.println("Enter the patient's gender:");
+        String gender = scanner.next();
+
+        System.out.println("Enter the patient's address:");
+        String address = scanner.next();
+
+        Patient patient = new Patient(name, age, gender, address);
+        patients.add(patient);
+
+        System.out.println("Patient added successfully!");
+    }
+
+    private static void addDoctor() {
+        System.out.println("Enter the doctor's name:");
+        String name = scanner.next();
+
+        System.out.println("Enter the doctor's specialization:");
+        String specialization = scanner.next();
+
+        Doctor doctor = new Doctor(name, specialization);
+        doctors.add(doctor);
+
+        System.out.println("Doctor added successfully!");
+    }
+
+    private static void viewAllPatients() {
+        for (Patient patient : patients) {
+            System.out.println(patient.toString());
+        }
+    }
+
+    private static void viewAllDoctors() {
+        for (Doctor doctor : doctors) {
+            System.out.println(doctor.toString());
+        }
+    }
+
+    static class Patient {
+        String name;
+        int age;
+        String gender;
+        String address;
+
+        public Patient(String name, int age, String gender, String address) {
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+            this.address = address;
+        }
+
+        @Override
+        public String toString() {
+            return "Patient{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    ", gender='" + gender + '\'' +
+                    ", address='" + address + '\'' +
+                    '}';
+        }
+    }
+
+    static class Doctor {
+        String name;
+        String specialization;
+
+        public Doctor(String name, String specialization) {
+            this.name = name;
+            this.specialization = specialization;
+        }
+
+        @Override
+        public String toString() {
+            return "Doctor{" +
+                    "name='" + name + '\'' +
+                    ", specialization='" + specialization + '\'' +
+                    '}';
+        }
+    }
+}
